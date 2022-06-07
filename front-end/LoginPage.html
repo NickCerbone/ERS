@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>ERS</title>
@@ -32,4 +32,28 @@
 </div>
 
 </body>
+</html>
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ERS</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="expense-crud.js"></script>
+        <body>
+            <div class="loginbox">
+                <img class="img-fluid" src="\ERS-Logo.jpg" alt="EXPENSES LOGO" width="50" height="50">
+                <h1>Expense  Reimbursement  System</h1>
+                <form>
+                    <p>Username</p>
+
+                    <input type="text" class="form-control" id="usrname" placeholder="Enter username" name="usernme">
+                    <p>Password</p>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+                    <button type="button" class="btn btn-primary" onclick="getEmployee(document.getElementById('usrname').value, document.getElementById('pwd').value)">Login</button>
+                </form>
+                <div id="invalid login message"></div>
+            </div>
+        </body>
+    </head>
 </html>
