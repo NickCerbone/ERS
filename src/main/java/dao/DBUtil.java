@@ -19,7 +19,8 @@ public class DBUtil {
 	public static Connection makeConnection() throws SQLException {
 
 		if (conn == null) {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ers", "postgres", "Pcqy?262");
+			//conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ers", "postgres", "Pcqy?262");
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ers", "postgres", "309758944Kk");
 		}
 		return conn;
 	}
