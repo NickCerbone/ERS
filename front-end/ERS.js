@@ -3,8 +3,6 @@ function getEmployee(username, password) {
             .then(response => response.json())
             .then(responseJson => {
             if (responseJson.empUserName == username && responseJson.empRole == "employee") {
-                //window.localStorage.setItem("currentEmp", JSON.stringify(responseJson));
-                //displayEmployeeAccess()
                 sessionStorage.setItem("currEmpId", responseJson.empId)
                 window.location.replace("EmployeeHomePage.html")
             } else if (responseJson.empUserName == username && responseJson.empRole == "manager") {
@@ -29,7 +27,7 @@ window.location.replace("LoginPage.html")
 }
 
 function getAllRequests() {
-    //document.write("data printed on document");
+    
     console.log("data printed on console");
 
     fetch("http://localhost:7474/reimbursement")
@@ -68,9 +66,6 @@ function getAllRequests() {
 
 
         .catch(error => console.log(error));
-
-    // this is asycnhornous call so code below this point would still run
-    // so need to say fetch the resouce then do this and then do this
 
 }
 
@@ -117,7 +112,9 @@ function displayAllRequestsByEmployee(empId) {
                                 <th>Requested Reimbursement Amount</th>
                                 <th>Reimbursement Status</th>
                                 <th>Aprroved by: First Name</th>
-                                <th>Approved by: Last Name</th>
+                                <th>Aprroved by: Last Name</th>
+                                <th>Approve Request</th>
+                                <th>Reject Request</th>
                             </tr>
                             </thead>
                             <tbody>`;
@@ -130,6 +127,14 @@ function displayAllRequestsByEmployee(empId) {
                                     <td>${requestsByEmployeeData.reimbStatus}</td>
                                     <td>${requestsByEmployeeData.approverFirstName}</td>
                                     <td>${requestsByEmployeeData.approverLastName}</td>
+                                    <td><button 
+                                            type="button" 
+                                            class="btn btn-primary"
+                                            onclick="approveRequest(${requestsByEmployeeData.reimbId})">approve</button></td>
+                                    <td><button 
+                                            type="button" 
+                                            class="btn btn-danger"
+                                            onclick="rejectRequest(${requestsByEmployeeData.reimbId})">reject</button></td>
                                   </tr>`;
             }
             allRequestsByEmployeeData += `</tbody></table>`;
@@ -140,6 +145,38 @@ function displayAllRequestsByEmployee(empId) {
         .catch(error => console.log(error));
    
 }
+
+function approveRequest(reimbId){
+    let newApproveRequest = {
+        reimbId: 0,
+        reimbAmt: 0,
+        reimbStatusId: 2,
+        requesterId: 0,
+        approverId: 0,
+    }
+
+    fetch("http://localhost:7474/updateRequest/"+reimbId, {
+        method: 'put',
+        body: JSON.stringify(newApproveRequest)
+    })
+    .then(response => displayAllResolved())
+ }
+
+ function rejectRequest(reimbId){
+    let newRejectRequest = {
+        reimbId: 0,
+        reimbAmt: 0,
+        reimbStatusId: 3,
+        requesterId: 0,
+        approverId: 0,
+    }
+
+    fetch("http://localhost:7474/updateRequest/"+reimbId, {
+        method: 'put',
+        body: JSON.stringify(newRejectRequest)
+    })
+    .then(response =>displayAllResolved())
+ }
 
 function displayAccountInformation() {
     console.log(sessionStorage.getItem("currEmpId"));
@@ -327,7 +364,6 @@ function displayAllEmployees() {
 }
 
 function displayAllPending() {
-    //document.write("data printed on document");
     console.log("data printed on console");
 
     fetch("http://localhost:7474/allPending")
@@ -362,14 +398,9 @@ function displayAllPending() {
 
 
         .catch(error => console.log(error));
-
-    // this is asycnhornous call so code below this point would still run
-    // so need to say fetch the resouce then do this and then do this
-
 }
 
 function displayAllResolved() {
-    //document.write("data printed on document");
     console.log("data printed on console");
 
     fetch("http://localhost:7474/allResolved")
@@ -408,8 +439,5 @@ function displayAllResolved() {
 
 
         .catch(error => console.log(error));
-
-    // this is asycnhornous call so code below this point would still run
-    // so need to say fetch the resouce then do this and then do this
 
 }
