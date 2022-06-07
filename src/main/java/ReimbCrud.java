@@ -90,6 +90,13 @@ public class ReimbCrud {
 			List<ReimbursementPojo> allResolved = reimbService.viewAllResolvedRequests();
 			ctx.json(allResolved);
 		});
+		
+		server.put("/updateRequest/{reimbid}", (ctx) -> {
+			int reimbIdInteger = Integer.parseInt(ctx.pathParam("reimbid"));
+			ReimbursementPojo newReimbursementPojo = ctx.bodyAsClass(ReimbursementPojo.class);
+			ReimbursementPojo returnReimbursementPojo = reimbService.manUpdateRequest(newReimbursementPojo, reimbIdInteger);
+			ctx.json(returnReimbursementPojo);
+		});
 	}
 
 }

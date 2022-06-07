@@ -22,6 +22,9 @@ public interface ReimbService {
 		
 	//method for manager to view all resolved
 	List<ReimbursementPojo> viewAllResolvedRequests() throws ApplicationException;
+	
+	ReimbursementPojo manUpdateRequest(ReimbursementPojo reimbursementPojo, int reimbId) throws ApplicationException;
+	
 }
 
 

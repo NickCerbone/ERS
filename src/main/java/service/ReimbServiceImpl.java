@@ -56,4 +56,10 @@ public class ReimbServiceImpl implements ReimbService {
 		List<ReimbursementPojo> allResolvedRequests = this.reimbursementDao.viewAllResolvedRequests();
 		return allResolvedRequests;
 	}
+
+	@Override
+	public ReimbursementPojo manUpdateRequest(ReimbursementPojo reimbursementPojo, int reimbId) throws ApplicationException {
+		ReimbursementPojo returnReimbursementPojo = this.reimbursementDao.manUpdateRequest(reimbursementPojo, reimbId);
+		return returnReimbursementPojo;
+	}
 }
