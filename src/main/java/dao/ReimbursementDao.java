@@ -21,4 +21,5 @@ public interface ReimbursementDao {
 	
 	List<ReimbursementPojo> viewAllResolvedRequests() throws ApplicationException;
 	
+	ReimbursementPojo manUpdateRequest(ReimbursementPojo reimbursementPojo, int reimbId) throws ApplicationException;
 }
